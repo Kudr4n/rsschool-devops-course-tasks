@@ -36,3 +36,19 @@ jobs:
         run: terraform init
       - name: Run plan
         run: terraform plan
+  
+  terraform-apply:
+    needs: [terraform-plan]
+    if: ${{ needs.terraform-plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/aws-auth
+      - uses: hashicorp/setup-terraform@v3
+      - name: Initialize terraform
+        run: terraform init
+      - name: Run plan
+        run: terraform apply -auto-approve

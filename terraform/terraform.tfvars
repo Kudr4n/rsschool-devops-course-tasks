@@ -9,3 +9,4 @@ iam_policy_arn = [
   "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
   "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess"
 ]
+bucket_name = "kudran-test-s3-bucket"
