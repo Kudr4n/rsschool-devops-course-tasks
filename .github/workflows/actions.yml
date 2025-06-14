@@ -1,0 +1,21 @@
+name: Terraform
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  terraform-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials
+        with:
+          role-to-assume: arn:aws:iam::747639505707:role/GithubActionsRole
+          aws-region: "eu-central-1"
+      - name: Check
+        run: terraform fmt -check
