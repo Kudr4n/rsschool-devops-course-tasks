@@ -29,6 +29,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
       - name: Initialize terraform
-        run: terraform init -chdir ./terraform
+        run: terraform init -chdir=./terraform
       - name: Run plan
-        run: terraform plan -chdir ./terraform
+        run: terraform plan -chdir=./terraform
