@@ -12,9 +12,6 @@ permissions:
   contents: read 
 
 jobs:
-  setup:
-    uses: ./.github/workflows/aws-setup.yml
-
   terraform-check:
     runs-on: ubuntu-latest
     defaults:
@@ -32,6 +29,7 @@ jobs:
       run:
         working-directory: terraform
     steps:
+      - uses: ./.github/workflows/aws-setup.yml
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
       - name: Initialize terraform
