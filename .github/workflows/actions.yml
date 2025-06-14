@@ -29,8 +29,8 @@ jobs:
       run:
         working-directory: terraform
     steps:
-      - uses: ./.github/workflows/aws-setup.yml
       - uses: actions/checkout@v4
+      - uses: ./.github/workflows/aws-setup.yml
       - uses: hashicorp/setup-terraform@v3
       - name: Initialize terraform
         run: terraform init
