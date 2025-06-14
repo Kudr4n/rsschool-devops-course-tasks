@@ -1,0 +1,10 @@
+name: "Configure AWS Creds"
+description: "Reusable AWS credentials setup using OIDC"
+runs:
+  using: "composite"
+  steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::747639505707:role/GithubActionsRole
+          aws-region: eu-central-1
