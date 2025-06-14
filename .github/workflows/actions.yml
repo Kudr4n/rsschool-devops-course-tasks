@@ -23,4 +23,4 @@ jobs:
           role-to-assume: "arn:aws:iam::747639505707:role/GithubActionsRole"
           aws-region: "eu-central-1"
       - name: Check
-        run: terraform fmt -check
+        run: terraform fmt -check ./terraform
