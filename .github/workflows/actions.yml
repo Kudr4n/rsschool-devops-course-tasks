@@ -31,4 +31,4 @@ jobs:
       - name: Initialize terraform
         run: terraform init ./terraform
       - name: Run plan
-        run: terraform plan ./terraform
+        run: terraform plan -chdir ./terraform
