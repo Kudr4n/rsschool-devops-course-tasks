@@ -12,15 +12,23 @@ permissions:
   contents: read 
 
 jobs:
+  setup:
+    uses: ./.github/workflows/aws-setup.yml
+
   terraform-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: "arn:aws:iam::747639505707:role/GithubActionsRole"
-          aws-region: "eu-central-1"
       - name: Check
         run: terraform fmt -check ./terraform
+
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Initialize terraform
+        run: terraform init ./terraform
+      - name: Run plan
+        run: terraform plan ./terraform

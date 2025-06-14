@@ -1,5 +1,5 @@
 resource "aws_iam_role" "github_actions_role" {
-  name = var.ghname
+  name               = var.ghname
   assume_role_policy = file("files/trust-policy.json")
 }
 

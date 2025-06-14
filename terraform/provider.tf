@@ -6,12 +6,12 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         	   = "kudran-s3-terraform"
-    key                = "state/terraform.tfstate"
-    region         	   = "eu-central-1"
-    encrypt        	   = true
-    use_lockfile       = true
- }
+    bucket       = "kudran-s3-terraform"
+    key          = "state/terraform.tfstate"
+    region       = "eu-central-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 
