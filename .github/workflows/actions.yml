@@ -30,7 +30,7 @@ jobs:
         working-directory: terraform
     steps:
       - uses: actions/checkout@v4
-      - uses: ./github/actions/aws-auth
+      - uses: ./.github/actions/aws-auth
       - uses: hashicorp/setup-terraform@v3
       - name: Initialize terraform
         run: terraform init
