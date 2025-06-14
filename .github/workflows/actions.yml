@@ -17,18 +17,24 @@ jobs:
 
   terraform-check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform    
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
       - name: Check
-        run: terraform fmt -check ./terraform
+        run: terraform fmt -check 
 
   terraform-plan:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
       - name: Initialize terraform
-        run: terraform init -chdir=./terraform
+        run: terraform init
       - name: Run plan
-        run: terraform plan -chdir=./terraform
+        run: terraform plan
