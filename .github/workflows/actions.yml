@@ -16,7 +16,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::747639505707:role/GithubActionsRole
+          role-to-assume: "arn:aws:iam::747639505707:role/GithubActionsRole"
           aws-region: "eu-central-1"
       - name: Check
         run: terraform fmt -check
