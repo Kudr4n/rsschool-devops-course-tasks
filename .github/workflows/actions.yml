@@ -1,0 +1,54 @@
+name: Terraform flow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main", "task-1"]
+  pull_request:
+    branches: ["main", "task-1"]
+
+permissions:
+  id-token: write
+  contents: read 
+
+jobs:
+  terraform-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: task_1/terraform  
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Check
+        run: terraform fmt -check 
+
+  terraform-plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: task_1/terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/aws-auth
+      - uses: hashicorp/setup-terraform@v3
+      - name: Initialize terraform
+        run: terraform init
+      - name: Run plan
+        run: terraform plan
+  
+  terraform-apply:
+    needs: [terraform-plan]
+    if: ${{ needs.terraform-plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: task_1/terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/aws-auth
+      - uses: hashicorp/setup-terraform@v3
+      - name: Initialize terraform
+        run: terraform init
+      - name: Run apply
+        run: terraform apply -auto-approve
